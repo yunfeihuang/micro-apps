@@ -1,28 +1,30 @@
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import { createPinia } from 'pinia'
+import {ObjectType, registerMicroApps, RegistrableApp, start, initGlobalState} from 'qiankun'
 // import ElementPlus from 'element-plus'
 // import 'element-plus/dist/index.css'
 import './style.css'
 import App from './App.vue'
-import {registerMicroApps, start} from 'qiankun'
+import microApps from './micro-apps'
 
-registerMicroApps([
-  {
-    name: 'main',
-    entry: 'http://127.0.0.1:5173/',
-    container: '#micro-app',
-    activeRule: '/'
-  }
-])
+
+
 createApp(App).use(createRouter({
   history: createWebHistory(),
   routes: [{
     path: '/',
     component: () => import('./components/HelloWorld.vue')
   }]
-})).use(createPinia()).mount('#app').$nextTick(() => {
-  // start()
-})
-// start()
+})).use(createPinia()).mount('#app')
 
+registerMicroApps(microApps.map(function (item): RegistrableApp<ObjectType> {
+  item.props = {
+    routerBase: item.activeRule
+  }
+  return item
+}))
+start({
+  prefetch: false,
+  sandbox: {strictStyleIsolation: true}
+})
