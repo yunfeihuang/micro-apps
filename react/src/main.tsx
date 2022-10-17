@@ -9,7 +9,6 @@ import renderWithQiankun, {
 
 let root: Root;
 function render(props: any) {
-  console.log('propspropspropsprops', props)
   const { container } = props;
   root = ReactDOM.createRoot(
     container

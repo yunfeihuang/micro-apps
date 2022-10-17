@@ -9,7 +9,7 @@ const count = ref(0)
 <template>
   <h1>{{ msg }}</h1>
   <div class="card">
-    <button type="button" @click="count++">count is {{ count }}</button>
+    <el-button type="button" @click="count++">count is {{ count }}</el-button>
     <p @click="useGlobal.setToken(Math.random() + '')">
       Edit
       <code>components/HelloWorld.vue</code> to test HMR

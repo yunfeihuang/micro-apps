@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import qiankunPlugin from 'vite-plugin-qiankun';
+import vitePluginImp from 'vite-plugin-imp'
 
 const useDevMode = true
 
@@ -21,8 +22,26 @@ export default defineConfig({
     react({
       fastRefresh: !useDevMode
     }),
+    vitePluginImp({
+      libList: [
+        {
+          libName: "antd",
+          style: (name) => `antd/es/${name}/style`,
+        },
+      ],
+    }),
     qiankunPlugin('viteApp', {
       useDevMode
     })
   ],
+  css: {
+    preprocessorOptions: {
+      less: {
+        javascriptEnabled: true,
+        modifyVars: {
+          '@primary-color': 'red',//设置antd主题色
+        },
+      },
+    }
+  },
 })
