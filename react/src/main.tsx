@@ -3,7 +3,6 @@ import ReactDOM, { Root } from "react-dom/client";
 import App from "./App";
 import "./index.css";
 import renderWithQiankun, {
-  QiankunProps,
   qiankunWindow,
 } from "vite-plugin-qiankun/dist/helper";
 
@@ -13,11 +12,11 @@ function render(props: any) {
   root = ReactDOM.createRoot(
     container
       ? (container.querySelector("#root") as Element)
-      : (document.getElementById("root") as Element)
+      : (document.querySelector("#root") as Element)
   );
   root.render(
     <React.StrictMode>
-      <App {...props}/>
+      <App {...props} />
     </React.StrictMode>
   );
 }
@@ -30,11 +29,11 @@ renderWithQiankun({
   bootstrap() {
     console.log("bootstrap");
   },
-  unmount(props: any) {
+  unmount() {
     console.log("unmount");
     root?.unmount();
   },
-  update: function (props: QiankunProps): void | Promise<void> {
+  update() {
     throw new Error("Function not implemented.");
   },
 });

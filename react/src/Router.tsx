@@ -1,9 +1,9 @@
-import { LazyExoticComponent } from "react"
-import { RouteObject } from "react-router-dom"
+import { LazyExoticComponent, Suspense } from "react"
+import { RouteObject, useRoutes } from "react-router-dom"
 
 export type RouteConfig = RouteObject & {component: LazyExoticComponent<any>}
 
-export function getRoutes (): RouteConfig [] {
+export function getFileRoutes (): RouteConfig [] {
   let result: RouteConfig [] = []
   const routeFiles = import.meta.glob('./pages/**/route.ts', {eager: true})
   for (const path in routeFiles) {
@@ -16,4 +16,16 @@ export function getRoutes (): RouteConfig [] {
   }
   return result
 }
+
+function Routes () {
+  return useRoutes(getFileRoutes().map((route) => {
+    return {
+      path: route.path,
+      element: <Suspense fallback={<div>loading</div>}><route.component /></Suspense>
+    }
+  }))
+}
+Routes.displayName = "Routes"
+
+export default Routes
 

@@ -9,6 +9,7 @@ export default defineConfig(({command, mode}) => {
   // const env = loadEnv(mode, process.cwd(), 'VITE_')
   // console.log('env', env)
   return {
+    envPrefix: ['VITE_', 'QK_'],
     resolve: {
       alias: [
         {find: '@', replacement: '/src'}
@@ -27,7 +28,11 @@ export default defineConfig(({command, mode}) => {
     server: {
       port: 3000,
       cors: true,
-      open: true
+      open: true,
+      proxy: {
+        '/assets/vue': 'http://localhost:3001',
+        '/assets/react': 'http://localhost:3002',
+      }
     }
   }
 })

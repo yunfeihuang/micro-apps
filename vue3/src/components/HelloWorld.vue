@@ -29,6 +29,7 @@ const count = ref(0)
     in your IDE for a better DX
   </p>
   <p class="read-the-docs">Click on the Vite and Vue logos to learn more</p>
+  <a href="/react" target="_qiankun">react应用</a>
 </template>
 
 <style scoped>

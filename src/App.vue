@@ -4,11 +4,15 @@
 </script>
 
 <template>
-  <router-link to="/vue">Vue应用</router-link>
-  <router-link to="/react">React应用</router-link>
+  <router-link to="/vue">
+    <el-button type="text">Vue应用</el-button>
+  </router-link>
+  <router-link to="/react">
+    <el-button type="text">React应用</el-button>
+  </router-link>
   <div id="micro-app1"></div>
   <div id="micro-app2"></div>
-  <router-view/>
+  <router-view />
 </template>
 
 <style scoped lang="scss">

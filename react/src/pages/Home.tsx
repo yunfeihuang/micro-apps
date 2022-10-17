@@ -1,5 +1,6 @@
 import { Button } from 'antd'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import reactLogo from '../assets/react.svg'
 
 function Home() {
@@ -27,6 +28,7 @@ function Home() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+      <a href="/vue" target="_qiankun">Vue3</a>
     </div>
   )
 }
