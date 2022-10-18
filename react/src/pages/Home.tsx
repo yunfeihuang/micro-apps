@@ -1,11 +1,13 @@
 import { Button } from 'antd'
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { MouseEvent, useState } from 'react'
 import reactLogo from '../assets/react.svg'
 
 function Home() {
   const [count, setCount] = useState(0)
-
+  const onClick = function (event: MouseEvent) {
+    const e = new Event('link')
+    event.target.dispatchEvent(e)
+  }
   return (
     <div className="App">
       <div>
@@ -28,6 +30,7 @@ function Home() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+      <button onClick={onClick}>Vue3</button>
       <a href="/vue" target="_qiankun">Vue3</a>
     </div>
   )

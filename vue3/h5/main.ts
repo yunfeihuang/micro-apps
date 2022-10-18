@@ -1,7 +1,6 @@
 import { createApp, App as VueApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router';
 import { createPinia } from 'pinia';
-import './style.css'
 import App from './App.vue'
 import {renderWithQiankun, qiankunWindow, QiankunProps} from 'vite-plugin-qiankun/dist/helper';
 
@@ -9,9 +8,9 @@ import {renderWithQiankun, qiankunWindow, QiankunProps} from 'vite-plugin-qianku
 let app: VueApp<Element>;
 
 const renderApp = (props: QiankunProps & {baseURL?: string, router?: Record<string, unknown>}) => {
-  console.log('vue3 propsprops', props)
+  console.log('h5 propsprops', props)
   const router = createRouter({
-    history: createWebHistory(props.baseURL || '/'),
+    history: createWebHistory(props.baseURL || '/h5/'),
     routes: [{
       path: '/',
       component: () => import('./components/HelloWorld.vue')

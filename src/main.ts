@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import { createRouter, createWebHistory, useRouter } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import { createPinia } from 'pinia'
 import {ObjectType, registerMicroApps, RegistrableApp, start, initGlobalState} from 'qiankun'
 // import ElementPlus from 'element-plus'
@@ -15,7 +15,7 @@ const router = createRouter({
     component: () => import('./components/HelloWorld.vue')
   }]
 })
-createApp(App).use(router).use(createPinia()).mount('#app')
+createApp(App).use(router).use(createPinia()).mount('#main-app')
 
 document.body.addEventListener('click', function (event) {
   const target = event.target as HTMLAnchorElement
@@ -23,6 +23,9 @@ document.body.addEventListener('click', function (event) {
     event.preventDefault()
     router.push(`${target.getAttribute('href')}`)
   }
+}, false)
+document.addEventListener('link', function (event) {
+  console.log('link', event)
 }, false)
 
 registerMicroApps(microApps.map(function (item): RegistrableApp<ObjectType> {
@@ -33,6 +36,6 @@ registerMicroApps(microApps.map(function (item): RegistrableApp<ObjectType> {
   return item
 }))
 start({
-  prefetch: true,
+  prefetch: false,
   // sandbox: {strictStyleIsolation: true}
 })
