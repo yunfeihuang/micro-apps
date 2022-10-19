@@ -9,10 +9,5 @@ export const useGlobalStore = defineStore({
     getToken (): string {
       return this.token
     }
-  },
-  actions: {
-    setToken (token: string):void {
-      this.token = token
-    }
   }
 })

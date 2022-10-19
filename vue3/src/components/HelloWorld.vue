@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-
+import { useQiankunStore } from '@/store/qiankun'
 defineProps<{ msg: string }>()
+const qiankunStore = useQiankunStore()
 
 const count = ref(0)
 </script>
@@ -29,7 +30,8 @@ const count = ref(0)
     in your IDE for a better DX
   </p>
   <p class="read-the-docs">Click on the Vite and Vue logos to learn more</p>
-  <a href="/react" target="_qiankun">react应用</a>
+  <div>全局数据：{{qiankunStore.user}}</div>
+  <a href="/react" target="router-link">react应用</a>
 </template>
 
 <style scoped>

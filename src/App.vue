@@ -1,6 +1,8 @@
 <script setup lang="ts">
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
+import { useQiankunStore } from '@/store/qiankun'
+const qiankunStore = useQiankunStore()
 </script>
 
 <template>
@@ -13,9 +15,10 @@
   <router-link to="/h5/">
     <el-button type="text">H5应用</el-button>
   </router-link>
-  <div id="micro-app1" v-once></div>
-  <div id="micro-app2" v-once></div>
-  <div id="micro-app3" v-once></div>
+  <div>基座全局数据：{{qiankunStore.user}}</div>
+  <div id="micro-app"></div>
+  <!-- <div id="micro-app2"></div>
+  <div id="micro-app3"></div> -->
   <router-view/>
 </template>
 

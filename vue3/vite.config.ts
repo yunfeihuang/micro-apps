@@ -19,10 +19,7 @@ export default defineConfig(({mode}) => {
     },
     plugins: [
       vue(),
-      qiankun('vue', {
-        useDevMode: true
-      }),
-      qiankun('h5', {
+      qiankun('viteapp', {
         useDevMode: true
       })
     ],

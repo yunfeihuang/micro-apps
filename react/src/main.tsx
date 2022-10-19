@@ -8,12 +8,14 @@ import renderWithQiankun, {
 
 let root: Root;
 function render(props: any) {
+  console.log('react propspropsprops', props)
   const { container } = props;
   root = ReactDOM.createRoot(
     container
       ? (container.querySelector("#root") as Element)
       : (document.querySelector("#root") as Element)
   );
+  
   root.render(
     <React.StrictMode>
       <App {...props} />

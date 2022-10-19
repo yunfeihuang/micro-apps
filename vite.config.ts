@@ -30,8 +30,8 @@ export default defineConfig(({command, mode}) => {
       cors: true,
       open: true,
       proxy: {
-        '/assets/vue': 'http://localhost:3001',
-        '/assets/react': 'http://localhost:3002',
+        '/vue/src/assets': 'http://localhost:3001',
+        '/react/src/assets': 'http://localhost:3002',
       }
     }
   }

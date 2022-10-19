@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useGlobalStore } from '@/store'
+import { useQiankunStore } from '@/store/qiankun'
 defineProps<{ msg: string }>()
-const global = useGlobalStore()
+const qiankunStore = useQiankunStore()
 const count = ref(0)
 </script>
 
@@ -10,12 +10,11 @@ const count = ref(0)
   <h1>{{ msg }}</h1>
   <div class="card">
     <el-button type="button" @click="count++">count is {{ count }}</el-button>
-    <p @click="useGlobal.setToken(Math.random() + '')">
+    <p>
       Edit
       <code>components/HelloWorld.vue</code> to test HMR
-      {{global.token}}
     </p>
-    {{global.user}}
+    全局数据：{{qiankunStore.user}}
   </div>
 
   <p>

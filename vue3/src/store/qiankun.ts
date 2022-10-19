@@ -2,8 +2,8 @@ import { defineStore } from 'pinia'
 
 const state: {token: string, user: Record<string, unknown>} = {token: 'token...', user: {name: '张三', age: 20}}
 
-export const useGlobalStore = defineStore({
-  id: 'global', 
+export const useQiankunStore = defineStore({
+  id: 'qiankun', 
   state: () => state,
   getters: {
     getUser (): any {

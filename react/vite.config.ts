@@ -2,6 +2,7 @@ import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 import qiankunPlugin from 'vite-plugin-qiankun';
 import vitePluginImp from 'vite-plugin-imp'
+import AutoImport from 'unplugin-auto-import/vite'
 
 const useDevMode = true
 const envPrefix = ['VITE_', 'QK_']
@@ -35,7 +36,11 @@ export default defineConfig(({mode}) => {
       }),
       qiankunPlugin('viteApp', {
         useDevMode
-      })
+      }),
+      // AutoImport({
+      //   imports: ['react'],
+      //   dts: './auto-imports.d.ts'
+      // }),
     ],
     css: {
       preprocessorOptions: {
@@ -46,9 +51,6 @@ export default defineConfig(({mode}) => {
           },
         },
       }
-    },
-    build: {
-      assetsInlineLimit: 4096 * 10
     }
   }
 })

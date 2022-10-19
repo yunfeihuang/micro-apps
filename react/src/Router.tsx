@@ -17,7 +17,7 @@ export function getFileRoutes (): RouteConfig [] {
   return result
 }
 
-function Routes () {
+function Routes () { // 自动加载文件路由配置
   return useRoutes(getFileRoutes().map((route) => {
     return {
       path: route.path,

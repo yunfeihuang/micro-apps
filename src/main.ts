@@ -1,12 +1,13 @@
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import { createPinia } from 'pinia'
-import {ObjectType, registerMicroApps, RegistrableApp, start, initGlobalState} from 'qiankun'
+import {ObjectType, registerMicroApps, RegistrableApp, start, initGlobalState, MicroAppStateActions} from 'qiankun'
 // import ElementPlus from 'element-plus'
 // import 'element-plus/dist/index.css'
 import './style.css'
 import App from './App.vue'
 import microApps from './micro-apps'
+import { useQiankunStore } from '@/store/qiankun'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -15,27 +16,44 @@ const router = createRouter({
     component: () => import('./components/HelloWorld.vue')
   }]
 })
-createApp(App).use(router).use(createPinia()).mount('#main-app')
+const pinia = createPinia()
+const appInstance = createApp(App).use(router).use(pinia)
 
+// 主应用跳转
 document.body.addEventListener('click', function (event) {
   const target = event.target as HTMLAnchorElement
-  if (target.tagName.toUpperCase() === 'A' && target.target === '_qiankun') {
+  if (target.tagName.toUpperCase() === 'A' && target.target === 'router-link') {
     event.preventDefault()
     router.push(`${target.getAttribute('href')}`)
   }
 }, false)
-document.addEventListener('link', function (event) {
-  console.log('link', event)
+document.addEventListener('router-link', function (event) {
+  router.push((event as CustomEvent).detail)
 }, false)
 
+const initState: Record<string, any> = {token: 'token...', user: {name: '张三', age: 20}}
+// 初始化 state
+const actions: MicroAppStateActions = initGlobalState(initState);
+
+actions.onGlobalStateChange((state, prev) => {
+  // state: 变更后的状态; prev 变更前的状态
+  console.log(state, prev);
+  Object.assign(initState, state)
+  const qiankunStore = useQiankunStore()
+  qiankunStore.setUser(state.user)
+});
+
+// actions.setGlobalState(state);
 registerMicroApps(microApps.map(function (item): RegistrableApp<ObjectType> {
   item.props = {
     baseURL: item.activeRule,
-    // $router: router
+    state: initState
   }
   return item
 }))
+
 start({
   prefetch: false,
   // sandbox: {strictStyleIsolation: true}
 })
+appInstance.mount('#main-app')

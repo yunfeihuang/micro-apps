@@ -1,13 +1,17 @@
 import { Button } from 'antd'
-import { MouseEvent, useState } from 'react'
-import reactLogo from '../assets/react.svg'
+import { useContext, useState } from 'react'
+import reactLogo from '@/assets/react.svg';
+import { QiankunContext } from '../qiankun';
+
+// const reactLogo = new URL('../assets/react.svg', import.meta.url).href
 
 function Home() {
   const [count, setCount] = useState(0)
-  const onClick = function (event: MouseEvent) {
-    const e = new Event('link')
-    event.target.dispatchEvent(e)
+  const onClick = function () {
+    document.dispatchEvent(new CustomEvent('router-link', {detail: '/vue'}))
   }
+  const {state, setGlobalState} = useContext(QiankunContext)
+
   return (
     <div className="App">
       <div>
@@ -18,8 +22,8 @@ function Home() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
+      <h1 onClick={onClick}>Vite + React</h1>
+      <div className="card" onClick={() => setGlobalState({user: {name: '李四', age: (Math.random() * 100)}})}>
         <Button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </Button>
@@ -30,8 +34,8 @@ function Home() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
-      <button onClick={onClick}>Vue3</button>
-      <a href="/vue" target="_qiankun">Vue3</a>
+      <div>全局数据：{JSON.stringify(state.user)}</div>
+      <a href="/vue" target="router-link">Vue3</a>
     </div>
   )
 }
