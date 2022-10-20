@@ -1,7 +1,7 @@
 import { Button } from 'antd'
 import { useContext, useState } from 'react'
 import reactLogo from '@/assets/react.svg';
-import { QiankunContext } from '../qiankun';
+import { Context } from '../qiankun';
 
 // const reactLogo = new URL('../assets/react.svg', import.meta.url).href
 
@@ -10,7 +10,7 @@ function Home() {
   const onClick = function () {
     document.dispatchEvent(new CustomEvent('router-link', {detail: '/vue'}))
   }
-  const {state, setGlobalState} = useContext(QiankunContext)
+  const {state, dispatch} = useContext(Context)
 
   return (
     <div className="App">
@@ -34,8 +34,8 @@ function Home() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
-      <div onClick={() => setGlobalState({user: {name: '李四', age: Math.round((Math.random() * 100))}})}>全局数据(单击修改数据)：{JSON.stringify(state.user)}</div>
-      <a href="/vue" target="router-link">Vue应用基座跳转</a>
+      <div onClick={() => dispatch({type: '', payload: {user: {name: '李四', age: Math.round((Math.random() * 100))}}})}>全局数据(单击修改数据)：{JSON.stringify(state.user)}</div>
+      <a href="/vue" target="router-link">基座跳转Vue应用</a>
     </div>
   )
 }

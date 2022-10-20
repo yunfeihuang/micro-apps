@@ -15,7 +15,7 @@ const qiankunStore = useQiankunStore()
   <router-link to="/h5/">
     <el-button type="text">H5应用</el-button>
   </router-link>
-  <div>基座全局数据：{{qiankunStore.user}}</div>
+  <div @click="() => $setGlobalState({user: {name: '李四', age: Math.round((Math.random() * 100))}})">基座全局数据(单击修改数据)：{{qiankunStore.user}}</div>
   <div id="micro-app"></div>
   <!-- <div id="micro-app2"></div>
   <div id="micro-app3"></div> -->

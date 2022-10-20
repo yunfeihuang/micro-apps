@@ -30,7 +30,7 @@ if (!qiankunWindow.__POWERED_BY_QIANKUN__) {
     mount(props) {
       console.log('--mount', props);
       renderApp(props)
-      appInstance.config.globalProperties.setGlobalState = props.setGlobalState
+      appInstance.config.globalProperties.$setGlobalState = props.setGlobalState
       const qiankunStore = useQiankunStore()
       qiankunStore.setUser(props.state.user as Record<string, unknown>)
       props.onGlobalStateChange((state: any, prev: any) => {

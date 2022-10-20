@@ -42,7 +42,7 @@ actions.onGlobalStateChange((state, prev) => {
   const qiankunStore = useQiankunStore()
   qiankunStore.setUser(state.user)
 });
-
+appInstance.config.globalProperties.$setGlobalState = actions.setGlobalState
 // actions.setGlobalState(state);
 registerMicroApps(microApps.map(function (item): RegistrableApp<ObjectType> {
   item.props = {
