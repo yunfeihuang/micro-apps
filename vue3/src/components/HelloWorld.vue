@@ -30,8 +30,8 @@ const count = ref(0)
     in your IDE for a better DX
   </p>
   <p class="read-the-docs">Click on the Vite and Vue logos to learn more</p>
-  <div>全局数据：{{qiankunStore.user}}</div>
-  <a href="/react" target="router-link">react应用</a>
+  <div @click="setGlobalState({user: {name: '李四', age: Math.round((Math.random() * 100))}})">全局数据(单击修改数据)：{{qiankunStore.user}}</div>
+  <a href="/react" target="router-link">react应用基座跳转</a>
 </template>
 
 <style scoped>

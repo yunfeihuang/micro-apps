@@ -23,7 +23,7 @@ function Home() {
         </a>
       </div>
       <h1 onClick={onClick}>Vite + React</h1>
-      <div className="card" onClick={() => setGlobalState({user: {name: '李四', age: (Math.random() * 100)}})}>
+      <div className="card">
         <Button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </Button>
@@ -34,8 +34,8 @@ function Home() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
-      <div>全局数据：{JSON.stringify(state.user)}</div>
-      <a href="/vue" target="router-link">Vue3</a>
+      <div onClick={() => setGlobalState({user: {name: '李四', age: Math.round((Math.random() * 100))}})}>全局数据(单击修改数据)：{JSON.stringify(state.user)}</div>
+      <a href="/vue" target="router-link">Vue应用基座跳转</a>
     </div>
   )
 }

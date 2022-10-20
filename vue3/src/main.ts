@@ -6,7 +6,7 @@ import App from './App.vue'
 import {renderWithQiankun, qiankunWindow, QiankunProps} from 'vite-plugin-qiankun/dist/helper';
 import { useQiankunStore } from './store/qiankun'
 
-let app: VueApp<Element>;
+let appInstance: VueApp<Element>;
 
 const renderApp = ({state, baseURL, ...props}: QiankunProps & {baseURL?: string, state?: Record<string, unknown>}) => {
   console.log('vue3 propsprops', props)
@@ -17,9 +17,9 @@ const renderApp = ({state, baseURL, ...props}: QiankunProps & {baseURL?: string,
       component: () => import('./components/HelloWorld.vue')
     }]
   })
-  app = createApp(App).use(router).use(createPinia())
+  appInstance = createApp(App).use(router).use(createPinia())
   const mountNode = props.container ? props.container.querySelector('#app') as Element : document.querySelector('#app') as Element
-  app.mount(mountNode)
+  appInstance.mount(mountNode)
 }
 
 console.log('qiankunWindow.__POWERED_BY_QIANKUN__', qiankunWindow.__POWERED_BY_QIANKUN__)
@@ -30,6 +30,7 @@ if (!qiankunWindow.__POWERED_BY_QIANKUN__) {
     mount(props) {
       console.log('--mount', props);
       renderApp(props)
+      appInstance.config.globalProperties.setGlobalState = props.setGlobalState
       const qiankunStore = useQiankunStore()
       qiankunStore.setUser(props.state.user as Record<string, unknown>)
       props.onGlobalStateChange((state: any, prev: any) => {
@@ -47,7 +48,7 @@ if (!qiankunWindow.__POWERED_BY_QIANKUN__) {
     unmount(props) {
       console.log('--unmount', props);
       // props?.offGlobalStateChange()
-      app?.unmount();
+      appInstance?.unmount();
     }
   });
 }
